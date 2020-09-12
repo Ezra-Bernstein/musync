@@ -35,5 +35,7 @@ def merge(files, outfile):
                 newsample += data[i]
         newsample //= len(datas)
         output.append(newsample)
-    print(np.asarray(output))
-    write(outfile, fs, np.asarray(output))
+    print(np.asarray(output, np.int16))
+    write(outfile, fs[0], np.asarray(output, np.int16))
+
+    

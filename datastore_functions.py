@@ -9,6 +9,7 @@ def addClass(classcode):
     })
 
     datastore_client.put(task)
+    return True
 
 def addUserToClass(classcode, username, instrument):
     datastore_client = datastore.Client()
@@ -28,7 +29,7 @@ def addUserToClass(classcode, username, instrument):
     user['Classes'][classcode] = instrument
     datastore_client.put(user)
     
-
+    return True
 
 def addUser(username, password):
     if "." in username:
@@ -44,6 +45,7 @@ def addUser(username, password):
         })
 
     datastore_client.put(task)
+    return True
 
 def verifyLogin(username, password):
     datastore_client = datastore.Client()
@@ -71,6 +73,7 @@ def removeUserFromClass(classcode, username):
     user = datastore_client.get(datastore_client.key('Username', username))
     user['Classes'].pop(classcode)
     datastore_client.put(user)
+    return True
 
 def removeClass(classcode):
     datastore_client = datastore.Client()
@@ -84,6 +87,7 @@ def removeClass(classcode):
         user['Classes'].pop(classcode)
 
     datastore_client.delete(datastore_client.key('Class', classcode))
+    return True
 
 def removeUser(username):
     datastore_client = datastore.Client()
@@ -97,3 +101,4 @@ def removeUser(username):
         task['Users'].pop(username)
 
     datastore_client.delete(datastore_client.key('Username', username))
+    return True
