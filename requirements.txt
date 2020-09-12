@@ -1,1 +1,6 @@
 Flask==1.1.2
+gunicorn==19.10.0
+#google-api-core==1.22.1 
+google-cloud-storage==1.27.0
+google-cloud-datastore==1.11.0
+python-dotenv==0.14.0
