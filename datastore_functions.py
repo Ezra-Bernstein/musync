@@ -5,7 +5,7 @@ def addClass(classcode):
     datastore_client = datastore.Client()
     task = datastore.Entity(datastore_client.key('Class', classcode))
     task.update({
-        'Users:': {}    #username: instrument
+        'Users': {}    #username: instrument
     })
 
     datastore_client.put(task)
