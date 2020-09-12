@@ -11,9 +11,11 @@ def addClass(classcode):
 
 def addUserToClass(classcode, username, instrument):
     datastore_client = datastore.Client()
-    key = datastore_client.key('Class', instrument)
+    key = datastore_client.key('Class', classcode)
     task = datastore_client.get(key)
     task[username] = instrument
 
     datastore_client.put(task)
+
+
 
