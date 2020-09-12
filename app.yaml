@@ -1,1 +1,7 @@
-runtime: python38
+runtime: custom
+env: flex
+
+env_variables:
+  SECRET_KEY: "�K*��L�Loy���"
+  STORAGE_BUCKET_NAME: "musync-1.appspot.com"
+
