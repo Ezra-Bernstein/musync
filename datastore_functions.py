@@ -123,6 +123,6 @@ def getInstrument(classcode, username):
     if classData is None:
         return False
     if username in classData['Users'].keys():
-        return classData['Users'][user]
+        return classData['Users'][username]
     
     return False
