@@ -37,7 +37,7 @@ def mp4merger(fnames):
     #preprocessing (mp4 to wav)
     #fnames = ["v1.mp4","v2.mp4","v3.mp4"]
     for i in range(len(fnames)):
-        subprocess.call(['-i', os.getcwd()+"\\"+fnames[i], os.getcwd()+"\\"+str(i)+".wav"])
+        subprocess.call(['-i', os.getcwd()+"\\tmp\\"+fnames[i], os.getcwd()+"\\tmp\\"+str(i)+".wav"])
   
     #cut both to start at clap
     times = []
@@ -46,13 +46,13 @@ def mp4merger(fnames):
         fs, x = read(str(i)+".wav")
         times.append(cutter(str(i)+".wav"))
         secs.append(times[i]/fs)
-        write(str(i)+"_clipped.wav", fs, x[times[i]:])
+        write(".\\tmp\\str(i)+"_clipped.wav", fs, x[times[i]:])
 
     #create a combined mixed.wav file
-    merge2("0_clipped.wav","1_clipped.wav")
+    merge2("\\tmp\\0_clipped.wav","\\tmp\\1_clipped.wav")
     for i in range(2, len(fnames)):
-        merge1(str(i)+"_clipped.wav")
+        merge1("\\tmp\\"+str(i)+"_clipped.wav")
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
-        subprocess.call(['-i', os.getcwd()+"\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\new_"+fnames[i]])
+        subprocess.call(['-i', os.getcwd()+"\\tmp\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\tmp\\new_"+fnames[i]])
