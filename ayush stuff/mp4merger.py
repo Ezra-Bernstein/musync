@@ -4,11 +4,6 @@ import numpy as np
 import subprocess
 import os
 
-#preprocessing (mp4 to wav)
-fnames = ["v1.mp4","v2.mp4","v3.mp4"]
-for i in range(len(fnames)):
-    subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', os.getcwd()+"\\"+fnames[i], os.getcwd()+"\\"+str(i)+".wav"])
-
 #get the time of clap
 def cutter(filename):
     sf, data = read(filename)
@@ -23,16 +18,7 @@ def cutter(filename):
     for i in range(len(data)):
         if data[i] >= threshold:
             return i
-
-#cut both to start at clap
-times = []
-secs = []
-for i in range(len(fnames)):
-    fs, x = read(str(i)+".wav")
-    times.append(cutter(str(i)+".wav"))
-    secs.append(times[i]/fs)
-    write(str(i)+"_clipped.wav", fs, x[times[i]:])
-
+        
 #merge two cut files into a single wav file
 def merge2(f1, f2):
     s1 = AudioSegment.from_wav(f1)
@@ -47,11 +33,28 @@ def merge1(f1):
     temp = s1.overlay(st, position=0)
     temp.export("mixed.wav", format="wav")
 
-#create a combined mixed.wav file
-merge2("0_clipped.wav","1_clipped.wav")
-for i in range(2, len(fnames)):
-    merge1(str(i)+"_clipped.wav")
+#everything
+def main(fnames):
+    
+    #preprocessing (mp4 to wav)
+    #fnames = ["v1.mp4","v2.mp4","v3.mp4"]
+    for i in range(len(fnames)):
+        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', os.getcwd()+"\\"+fnames[i], os.getcwd()+"\\"+str(i)+".wav"])
+  
+    #cut both to start at clap
+    times = []
+    secs = []
+    for i in range(len(fnames)):
+        fs, x = read(str(i)+".wav")
+        times.append(cutter(str(i)+".wav"))
+        secs.append(times[i]/fs)
+        write(str(i)+"_clipped.wav", fs, x[times[i]:])
 
-#cut the video portions of original files and save with same name
-for i in range(len(fnames)):
-    subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', os.getcwd()+"\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\new_"+fnames[i]])
+    #create a combined mixed.wav file
+    merge2("0_clipped.wav","1_clipped.wav")
+    for i in range(2, len(fnames)):
+        merge1(str(i)+"_clipped.wav")
+
+    #cut the video portions of original files and save with same name
+    for i in range(len(fnames)):
+        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', os.getcwd()+"\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\new_"+fnames[i]])
