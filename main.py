@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, request, render_template
+from storage_functions import upload_blob
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -9,6 +10,18 @@ app = Flask(__name__)
 def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'
+
+@app.route('/home')
+def home():
+    return render_template("home.html")
+
+@app.route('/upload', methods = ['POST'])
+def upload():
+    if request.method == 'POST':
+        file = "GET FILE HERE"
+        #upload_blob(file)
+    
+
 
 
 if __name__ == '__main__':
