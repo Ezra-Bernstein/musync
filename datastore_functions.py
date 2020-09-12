@@ -115,3 +115,12 @@ def getClasses(username):
         classes.append(classcode)
 
     return classes
+
+def getInstrument(classcode, username):
+    datastore_client = datastore.Client()
+    classData = datastore_client.get(datastore_client.key('Class', classcode))
+
+    for user in classData.keys():
+        if user == username:
+            return classData[user]
+    return False
