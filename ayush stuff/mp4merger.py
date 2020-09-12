@@ -34,8 +34,7 @@ def merge1(f1):
     temp.export("mixed.wav", format="wav")
 
 #everything
-def main(fnames):
-    
+def mp4merger(fnames):    
     #preprocessing (mp4 to wav)
     #fnames = ["v1.mp4","v2.mp4","v3.mp4"]
     for i in range(len(fnames)):
