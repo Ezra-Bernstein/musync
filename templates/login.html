@@ -1,9 +1,91 @@
 <!DOCTYPE html>
-<head>
-    Login
-</head>
 
-<form action="/login">
-    <input type="text" name="username">
-    <button type = "submit">Submit</button> 
-</form>
+<html>
+	<head>
+      <meta charset = "utf-8">
+      
+      <!--responsive viewport meta tag-->
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      <title> Login </title>
+      
+      <!--Bulma CSS CDN-->
+      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+      
+      <!--To make use of Font Awesome icons-->
+      <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	  
+	  <style>
+	  
+	  center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	  }
+	 
+	  
+	  </style>
+   </head>
+   
+
+	<!--<form action="/login">
+		<input type="text" name="username">
+		<button type = "submit">Submit</button> 
+	</form>-->
+	
+	<body>
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+		  <div class="navbar-brand">
+			<div class="navbar-item"><a class="button" href=""><span class="has-text-primary">Mu</span>sync</a></div>
+
+		  </div>
+		  <div id="navbar" class="navbar-menu">
+			<div class="navbar-start">
+			  <a class="navbar-item" href="">About</a>
+			</div>
+		  </div>
+		</nav>
+	
+	
+	<!-- login page from https://medium.com/@joseph.a.guzzardo/creating-a-login-with-bulma-2ab75b9695ac -->
+	
+		<div class="hero is-fullheight is-primary">
+		  <div class="hero-body">
+			<div class="container has-text-centered">
+			  <div class="column is-8 is-offset-2">
+				<h3 class="title has-text-white">Login</h3>
+				<hr class="login-hr">
+				
+				<div class="box">
+				  <div class="box">
+					<img src="Logo.PNG">
+				  </div>
+				  <div class="title has-text-grey is-5">Please enter your username and password.</div>
+
+
+				<form action="/login">
+				  <div class="field">
+					<div class="control">
+					  <input class="input is-large" type="username" placeholder="Username" autofocus="">
+					</div>
+				  </div>
+				  <div class="field">
+					<div class="control">
+					  <input class="input is-large" type="password" placeholder="Password">
+					</div>
+				  </div>
+				  
+				  <br>
+				  
+				  <button  type = "submit" class="button is-block is-link is-large is-fullwidth">Login</button>
+				</form>
+				
+			  </div>
+			</div>
+		  </div>
+		</div>
+	
+	</body>
+	
+	
+
+</html>

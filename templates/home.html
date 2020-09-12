@@ -1,11 +1,121 @@
 <!DOCTYPE html>
-<head>
-    <title>Home</title>
-</head>
+<html>
+   <head>
+      <meta charset = "utf-8">
+      
+      <!--responsive viewport meta tag-->
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      <title> Musync </title>
+      
+      <!--Bulma CSS CDN-->
+      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+      
+      <!--To make use of Font Awesome icons-->
+      <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	  
+	  <style>
+	  
+	  .center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	  }
+	  
+	  .hero::before { background-image: url("im.jpg"); background-size: cover; content: ""; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 110%; z-index: -2; opacity: 0.8; } 
+	  
+	  .hero::after { background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,209,178,1) 100%); content: ""; display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 110%; z-index: -1; opacity: 0.4; }
+	  
+	  
+	  </style>
+   </head>
+   
+   <body>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  	  <div class="navbar-brand">
+  	    <div class="navbar-item"><a class="button" href=""><span class="has-text-primary">Mu</span>sync</a></div>
 
-<body>
-    <form action="/upload" method="POST" target="_self" enctype=multipart/form-data>
-        <input  type="file" name="file" id="videoFile">
-        <button type="submit">Submit</button>
-    </form>
-</body>
+  	  </div>
+  	  <div id="navbar" class="navbar-menu">
+  	    <div class="navbar-start">
+  	      <a class="navbar-item" href="">About</a>
+  	    </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-link" href="login.html">Login</a>
+            </div>
+          </div>
+        </div>
+  	  </div>
+  	</nav>
+	
+	<section class="hero is-medium">
+	<div class="hero-body">
+		<div class="container">
+			<div class="column is-flex">
+					<div class="notification is-light">
+						
+						<h1 class="title is-size-1"> <span class="has-text-primary">Mu</span>sync </h1>
+						
+						
+						
+						<p class="is-size-5">
+						
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+						</p>
+						
+						<br></br>
+						
+						
+						<a class="button is-primary" href="">
+							<strong>Register Now</strong>
+						</a>
+						
+						
+					</div>
+				</div>
+	  		
+		</div>
+	</div>
+</section>
+  
+  <section class="section">
+		<div class="container">
+			<div class="columns">
+				<div class="column is-flex">
+					<div class="notification is-info">
+						<h1 class="title"> Combine </h1>
+						<p class="is-size-5">
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+						</p>
+					</div>
+				</div>
+				
+				<div class="column is-flex">
+					<div class="notification is-primary">
+						<h1 class="title"> Review </h1>
+						<p class="is-size-5">
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+						</p>
+					</div>
+				</div>
+				
+				<div class="column is-flex">
+					<div class="notification is-link">
+						<h1 class="title"> Collaborate </h1>
+						<p class="is-size-5">
+							At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	  </section>
+	  
+	 
+	 
+	  
+
+  </body>
+</html>
