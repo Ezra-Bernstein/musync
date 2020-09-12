@@ -5,15 +5,16 @@ import subprocess
 #2 mp4 files to 2 wav files
 #subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\tough_time.mp4", "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\aa.wav"])
 #subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\slowclap.mp4", "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\bb.wav"])
-file1 = '..\\gabe stuff\\test data\\c.wav'
-file2 = '..\\gabe stuff\\test data\\d.wav'
-file3 = '..\\gabe stuff\\test data\\b.wav'
-file4 = '..\\gabe stuff\\test data\\a.wav'
+file1 = 'a.wav'
+file2 = 'b.wav'
+file3 = 'c.wav'
+file4 = 'd.wav'
+
 
 def cutter(filename):
     sf, data = read(filename)
     SCAN_TIME = 51 #how many seconds in the beginning do you scan the clap for?
-    THRESH_CAP = .8
+    THRESH_CAP = .4
     #MEMORY_LEN = .3#How many seconds it has to be < threshold before it registers a separate clap
     if data.ndim == 1:
         data = list(map(abs, data[:SCAN_TIME*sf]))
@@ -55,14 +56,21 @@ write('clipDD.wav', f4, d)
 #merge the cut files into a single wav file
 from pydub import AudioSegment
 from pydub.playback import play
+
 sound1 = AudioSegment.from_wav("clipAA.wav")
 sound2 = AudioSegment.from_wav("clipBB.wav")
-sound3 = AudioSegment.from_wav("clipCC.wav")
-sound4 = AudioSegment.from_wav("clipDD.wav")
 tmpsound = sound1.overlay(sound2, position=0)
-tmpsound2 = sound3.overlay(tmpsound, position=0)
-tmpsound3 = sound4.overlay(tmpsound2, position=0)
-tmpsound3.export("mixed_sounds.wav", format="wav")
+tmpsound.export("mixed_temp1.wav", format="wav")
+
+soundt = AudioSegment.from_wav("mixed_temp1.wav")
+sound3 = AudioSegment.from_wav("clipCC.wav")
+tmpsound = sound3.overlay(soundt, position=0)
+tmpsound.export("mixed_temp2.wav", format="wav")
+
+soundt = AudioSegment.from_wav("mixed_temp2.wav")
+sound4 = AudioSegment.from_wav("clipDD.wav")
+tmpsound = sound4.overlay(soundt, position=0)
+tmpsound.export("mixed_sounds.wav", format="wav")
 
 #seconds1 = str(sec1) # has to be a string
 #seconds2 = str(sec2) # has to be a string
