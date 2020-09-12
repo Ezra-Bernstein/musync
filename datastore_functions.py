@@ -120,7 +120,9 @@ def getInstrument(classcode, username):
     datastore_client = datastore.Client()
     classData = datastore_client.get(datastore_client.key('Class', classcode))
 
-    for user in classData.keys():
-        if user == username:
-            return classData[user]
+    if classData is None:
+        return False
+    if user in classData['Users'].keys():
+        return classData['Users'][user]
+    
     return False

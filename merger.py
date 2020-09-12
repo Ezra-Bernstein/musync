@@ -8,7 +8,11 @@ def cutter(sf, data):
     SCAN_TIME = 10 #how many seconds in the beginning do you scan the clap for?
     THRESH_CAP = .8
     #MEMORY_LEN = .3#How many seconds it has to be < threshold before it registers a separate clap
-    data = list(map(abs, data[:SCAN_TIME*sf, 0]))
+    if data.ndim == 1:
+        data = list(map(abs, data[:SCAN_TIME*sf]))
+    else:
+        data = list(map(abs, data[:SCAN_TIME*sf, 0]))
+
     threshold = max(data)*THRESH_CAP
     last = -99999999999
     for i in range(len(data)):
