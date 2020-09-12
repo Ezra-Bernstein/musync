@@ -102,3 +102,16 @@ def removeUser(username):
 
     datastore_client.delete(datastore_client.key('Username', username))
     return True
+
+def getClasses(username):
+    datastore_client = datastore.Client()
+    user = datastore_client.get(datastore_client.key('Username', username))
+
+    if user is None:
+        return False
+    
+    classes = []
+    for classcode in user['Classes']:
+        classes.append(classcode)
+
+    return classes
