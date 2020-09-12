@@ -9,6 +9,7 @@ def addClass(classcode):
     })
 
     datastore_client.put(task)
+    return True
 
 def addUserToClass(classcode, username, instrument):
     datastore_client = datastore.Client()
@@ -16,8 +17,10 @@ def addUserToClass(classcode, username, instrument):
     key = datastore_client.key('Class', classcode)
     task = datastore_client.get(key)
     
-    
     user = datastore_client.get(datastore_client.key('Username', username))
+
+    if task is None or user is None:
+        return False
     
     task['Users'][username] = instrument
     datastore_client.put(task)
@@ -26,7 +29,7 @@ def addUserToClass(classcode, username, instrument):
     user['Classes'][classcode] = instrument
     datastore_client.put(user)
     
-
+    return True
 
 def addUser(username, password):
     if "." in username:
@@ -42,13 +45,15 @@ def addUser(username, password):
         })
 
     datastore_client.put(task)
+    return True
 
 def verifyLogin(username, password):
-    
     datastore_client = datastore.Client()
+    
+    
     task = datastore_client.get(datastore_client.key('Username', username))
 
-    if task['Password'] != password:
+    if task is not None and task['Password'] != password:
         return False    #Incorrect password
     else:
         return True
@@ -58,7 +63,7 @@ def removeUserFromClass(classcode, username):
     key = datastore_client.key('Class', classcode)
     task = datastore_client.get(key)
 
-    if username not in task['Users']:
+    if task is not None and username not in task['Users']:
         return False    #User not in class
     else:
         task['Users'].pop(username)
@@ -68,23 +73,32 @@ def removeUserFromClass(classcode, username):
     user = datastore_client.get(datastore_client.key('Username', username))
     user['Classes'].pop(classcode)
     datastore_client.put(user)
+    return True
 
 def removeClass(classcode):
     datastore_client = datastore.Client()
     task = datastore_client.get(datastore_client.key('Class', classcode))
 
+    if task is None:
+        return False
+    
     for username in task['Users']:
         user = datastore_client.get(datastore_client.key('Username', username))
         user['Classes'].pop(classcode)
 
     datastore_client.delete(datastore_client.key('Class', classcode))
+    return True
 
 def removeUser(username):
     datastore_client = datastore.Client()
     user = datastore_client.get(datastore_client.key('Username', username))
 
+    if user is None:
+        return False
+    
     for classcode in user['Classes']:
         task = datastore_client.get(datastore_client.key('Class', classcode))
         task['Users'].pop(username)
 
     datastore_client.delete(datastore_client.key('Username', username))
+    return True
