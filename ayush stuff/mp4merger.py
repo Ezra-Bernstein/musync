@@ -54,6 +54,6 @@ def mp4merger(fnames):
     for i in range(2, len(fnames)):
         merge1(str(i)+"_clipped.wav")
 
-    #cut the video portions of original files and save with same name
+    #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
         subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', os.getcwd()+"\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\new_"+fnames[i]])
