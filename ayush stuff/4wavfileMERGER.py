@@ -5,17 +5,20 @@ import subprocess
 #2 mp4 files to 2 wav files
 #subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\tough_time.mp4", "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\aa.wav"])
 #subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg', '-i', "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\slowclap.mp4", "C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\bb.wav"])
-file1 = 'a.wav'
-file2 = 'b.wav'
-file3 = 'c.wav'
-file4 = 'd.wav'
+file1 = '..\\gabe stuff\\test data\\a.wav'
+file2 = '..\\gabe stuff\\test data\\b.wav'
+file3 = '..\\gabe stuff\\test data\\c.wav'
+file4 = '..\\gabe stuff\\test data\\d.wav'
 
 def cutter(filename):
     sf, data = read(filename)
-    SCAN_TIME = 10 #how many seconds in the beginning do you scan the clap for?
+    SCAN_TIME = 51 #how many seconds in the beginning do you scan the clap for?
     THRESH_CAP = .8
     MEMORY_LEN = .3#How many seconds it has to be < threshold before it registers a separate clap
-    data = list(map(abs, data[:SCAN_TIME*sf]))
+    if data.ndim == 1:
+        data = list(map(abs, data[:SCAN_TIME*sf]))
+    else:
+        data = list(map(abs, data[:SCAN_TIME*sf, 0]))
     threshold = max(data)*THRESH_CAP
     last = -99999999999
     for i in range(len(data)):
