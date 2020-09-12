@@ -44,7 +44,9 @@
 		<section class="section">
 			<h1 class="title is-size-1 has-text-primary"> Classes </h1>
 			<div class = "hero-body">
-				
+				{% for class in classes %}
+				<a href="{{url_for('showClass', classcode=code)}}">{{ classCode }}</a>
+				{{% endfor %}}
 			</div>
 		</section>
 	
