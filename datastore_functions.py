@@ -1,5 +1,6 @@
 # Imports the Google Cloud client library
 from google.cloud import datastore
+from werkzeug.security import check_password_hash, generate_password_hash
 
 def addClass(classcode):
     datastore_client = datastore.Client()
@@ -52,8 +53,9 @@ def verifyLogin(username, password):
     
     
     task = datastore_client.get(datastore_client.key('Username', username))
-
-    if task is not None and task['Password'] != password:
+    print(task)
+    print(check_password_hash(task['Password'], password))
+    if task is not None and not check_password_hash(task['Password'], password):
         return False    #Incorrect password
     else:
         return True
