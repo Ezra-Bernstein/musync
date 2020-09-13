@@ -130,7 +130,7 @@ def getInstrument(classcode, username):
 def getMembers(classcode):
     
     datastore_client = datastore.Client()
-    task = datastore_client.get(datastore_client.key('Username', username))
+    task = datastore_client.get(datastore_client.key('Class', classcode))
 
     if task is None:
         return False
