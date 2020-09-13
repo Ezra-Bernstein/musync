@@ -1,4 +1,5 @@
 from google.cloud import storage
+import os
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
@@ -22,7 +23,8 @@ def transfer_files(bucket_name, classcode):
     """Transfers all files in class to /tmp"""
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
-    count = 0
+    if not os.path.isdir("tmp/"+classcode):
+        os.mkdir("tmp/"+classcode)
     out = []
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:
@@ -51,3 +53,5 @@ def download_blob(bucket_name, source_blob_name, destination_file_name):
         )
     )
 
+
+transfer_files("musync-1.appspot.com", "myclasscode")
