@@ -4,5 +4,14 @@
 </head>
 
 <body>
-    <video src = "{{ https://storage.cloud.google.com/musync-1.appspot.com/" + classcode + "/" + username + "_" + instrument + ".mp4" }}></video>
+    <video controls src = "{{ 'https://storage.cloud.google.com/musync-1.appspot.com/' + classcode + '/' + username + '_' + instrument + '.mp4' }}" height=240 width=480></video>
+    <form enctype="multipart/form-data" action="/upload" method="POST">
+        <input type="file" name="file">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form action="/merge" method="POST">
+        <button type="submit">MERGE VIDEOS!</button>
+    </form>
+
 </body>

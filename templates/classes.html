@@ -74,10 +74,12 @@
 			<div class="columns is-multiline">
 				<div class="column is-one-third">
 				
-			
+					{% for class in classes %}
 					<div class="notification is-primary">
-						<a class="title center"> WEF96E </a>
+						<a class="title center" href="{{url_for('showClass', classcode=class)}}">{{class}}</a>
 					</div>
+					{% endfor %}
+					
 					
 					
 				</div>
