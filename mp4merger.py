@@ -56,16 +56,15 @@ def mp4merger(fnames):
     merge2("/tmp/"+tup[0][0]+"_clipped.wav", "/tmp/"+tup[1][0]+"_clipped.wav")
     for i in range(2, len(fnames)):
         merge1("/tmp/"+tup[i][0]+"_clipped.wav")
+        
+    if (not os.path.isdir("/tmp/new_" + fnames[0][:fnames[0].find("/")])):
+        os.system("rm -r -f -d /tmp/new_" + fnames[0][:fnames[0].find("/")])
+
+    os.mkdir("./tmp/new_" + fnames[0][:fnames[0].find("/")])
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
-        bool1 = False
-        for j in range(len(fnames[i])):
-            if(not bool1 and fnames[i][len(fnames[i])-j-1]=="/"):
-                bool1 = True
-            elif(fnames[i][len(fnames[i])-j-1]=="/"):
-                os.mkdir("/tmp/new_" + fnames[i][:j-2])
-                break
+
         command = "ffmpeg -i /tmp/" + fnames[i] + " -ss " + str(secs[i]) + " /tmp/new_" + fnames[i]
         subprocess.call(command, shell=True)
         
