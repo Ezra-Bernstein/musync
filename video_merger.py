@@ -1,8 +1,16 @@
 import ffmpeg, os
 from operator import itemgetter
-from videoprops import get_video_properties
 
 delim = "_"
+
+def get_video_properties(v):
+    
+    res = os.popen("ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 {}".format(v)).read()
+
+    width = int(res[:res.find('x')])
+    height = int(res[res.find('x') + 1:-1])
+
+    return [width, height]
 
 def get_max_size(videos):
     max_width = 0
@@ -10,8 +18,8 @@ def get_max_size(videos):
 
     for v in videos:
         props = get_video_properties(v)
-        max_width = max(max_width, props['width'])
-        max_height = max(max_height, props['height'])
+        max_width = max(max_width, props[0])
+        max_height = max(max_height, props[1])
 
     return max_width, max_height
 
@@ -23,7 +31,6 @@ def resize(videos, maxw, maxh):
         'y':'(oh-ih)/2',
     }
     for v in videos:
-        props = get_video_properties(v)
 
         (
             ffmpeg
