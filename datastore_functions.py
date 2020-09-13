@@ -5,7 +5,7 @@ def addClass(classcode):
     datastore_client = datastore.Client()
     task = datastore.Entity(datastore_client.key('Class', classcode))
     task.update({
-        'Users': {}    #username: instrument
+        'Users:': {}    #username: instrument
     })
 
     datastore_client.put(task)
@@ -122,7 +122,20 @@ def getInstrument(classcode, username):
 
     if classData is None:
         return False
-    if username in classData['Users'].keys():
-        return classData['Users'][username]
+    if user in classData['Users'].keys():
+        return classData['Users'][user]
     
     return False
+
+def getMembers(classcode):
+    
+    datastore_client = datastore.Client()
+    task = datastore_client.get(datastore_client.key('Username', username))
+
+    if task is None:
+        return False
+    
+    out = []
+    for user in task['Users'].keys():
+        out.append([user, task['Users'][user]])
+    return out
