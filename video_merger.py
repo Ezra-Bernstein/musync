@@ -201,7 +201,7 @@ def merge_all(user_inst, maxw, maxh, npc):
         #we need to rename the file
         os.system("mv {}fin.mp4 combined.mp4".format(insts[0]))
 
-def merge(user_inst):
+def merge_files(user_inst):
 
     user_inst = sorted(user_inst, key=itemgetter(1))
 
