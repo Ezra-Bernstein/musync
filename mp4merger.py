@@ -57,6 +57,9 @@ def mp4merger(fnames):
     for i in range(2, len(fnames)):
         merge1("/tmp/"+tup[i][0]+"_clipped.wav")
         
+    if (fnames[0][0] == "/"):
+        fnames[0] = fname[0][1:]
+        
     if (not os.path.isdir("/tmp/new_" + fnames[0][:fnames[0].find("/")])):
         os.system("rm -r -f -d /tmp/new_" + fnames[0][:fnames[0].find("/")])
 
