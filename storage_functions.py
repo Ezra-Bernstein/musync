@@ -23,8 +23,8 @@ def transfer_files(bucket_name, classcode):
     """Transfers all files in class to /tmp"""
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
-    # if not os.path.isdir("tmp/"+classcode):
-    #     os.mkdir("tmp/"+classcode)
+    if not os.path.isdir("/tmp/"+classcode):
+        os.mkdir("/tmp/"+classcode)
     out = []
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:

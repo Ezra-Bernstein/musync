@@ -23,14 +23,14 @@ def merge2(f1, f2):
     s1 = AudioSegment.from_wav(f1)
     s2 = AudioSegment.from_wav(f2)
     temp = s1.overlay(s2, position=0)
-    temp.export("./tmp/mixed.wav", format="wav")
+    temp.export("/tmp/mixed.wav", format="wav")
 
 #merge one cut file into the main wav file
 def merge1(f1):
     s1 = AudioSegment.from_wav(f1)
-    st = AudioSegment.from_wav("./tmp/mixed.wav")
+    st = AudioSegment.from_wav("/tmp/mixed.wav")
     temp = s1.overlay(st, position=0)
-    temp.export("./tmp/mixed.wav", format="wav")
+    temp.export("/tmp/mixed.wav", format="wav")
 
 #everything
 def mp4merger(fnames):    
@@ -45,17 +45,17 @@ def mp4merger(fnames):
     secs = []
     tup = []
     for i in range(len(fnames)):
-        fs, x = read("./tmp/"+str(i)+".wav")
-        times.append(cutter("./tmp/"+str(i)+".wav"))
+        fs, x = read("/tmp/"+str(i)+".wav")
+        times.append(cutter("/tmp/"+str(i)+".wav"))
         secs.append(times[i]/fs)
-        write("./tmp/"+str(i)+"_clipped.wav", fs, x[times[i]:])
+        write("/tmp/"+str(i)+"_clipped.wav", fs, x[times[i]:])
         tup.append((str(i),len(x[times[i]:])))
     tup.sort(key=lambda x: (x[1]))
 
     #create a combined mixed.wav fileS        
-    merge2("./tmp/"+tup[0][0]+"_clipped.wav", "./tmp/"+tup[1][0]+"_clipped.wav")
+    merge2("/tmp/"+tup[0][0]+"_clipped.wav", "/tmp/"+tup[1][0]+"_clipped.wav")
     for i in range(2, len(fnames)):
-        merge1("./tmp/"+tup[i][0]+"_clipped.wav")
+        merge1("/tmp/"+tup[i][0]+"_clipped.wav")
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
