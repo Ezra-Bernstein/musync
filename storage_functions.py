@@ -23,13 +23,13 @@ def transfer_files(bucket_name, classcode):
     """Transfers all files in class to /tmp"""
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
-    if not os.path.isdir("tmp/"+classcode):
-        os.mkdir("tmp/"+classcode)
+    # if not os.path.isdir("tmp/"+classcode):
+    #     os.mkdir("tmp/"+classcode)
     out = []
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:
             name = classcode+"/"+blob.name[len(classcode)+1:]
-            blob.download_to_filename("tmp/"+name)
+            blob.download_to_filename("/tmp/"+name)
             out.append(name)
     return out
     
@@ -54,4 +54,3 @@ def download_blob(bucket_name, source_blob_name, destination_file_name):
     )
 
 
-transfer_files("musync-1.appspot.com", "myclasscode")
