@@ -37,7 +37,9 @@ def mp4merger(fnames):
     #preprocessing (mp4 to wav)
     #fnames = ["v1.mp4","v2.mp4","v3.mp4"]
     for i in range(len(fnames)):
-        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], os.getcwd()+"\\tmp\\"+str(i)+".wav"])
+        command = "ffmpeg -i /tmp/" + fnames[i] + " /tmp/" + str(i) + ".wav"
+        subprocess.call(command, shell=True)
+#        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], os.getcwd()+"\\tmp\\"+str(i)+".wav"])
   
     #cut both to start at clap
     times = []
@@ -55,6 +57,8 @@ def mp4merger(fnames):
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
-        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\tmp\\new_"+fnames[i]])
+        command = "ffmpeg -i /tmp/" + fnames[i] + " -ss " + str(secs[i]) + " /tmp/new_" + fnames[i]
+        subprocess.call(command, shell=True)
+#        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\tmp\\new_"+fnames[i]])
 
 mp4merger(["v1.mp4","v2.mp4","v3.mp4"])         
