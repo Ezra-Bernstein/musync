@@ -25,7 +25,7 @@ def transfer_files(bucket_name, classcode):
     count = 0
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:
-            blob.download_to_filename("tmp/"+classcode+"/"+blob.name[len(classcode):])
+            blob.download_to_filename("tmp/"+classcode+"/"+blob.name[len(classcode)+1:])
             
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(source_blob_name)
