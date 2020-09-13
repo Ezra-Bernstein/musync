@@ -16,42 +16,181 @@
 	  
 	  <style>
 	  
-	  center {
+	  .center {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	  }
 	  
+	  /* Solid border */
+	  hr.solid {
+	    border-top: 3px solid hsl(171, 100%, 41%);
+	 }
+	 
+	 /* Solid border */
+	  hr.solid2 {
+	    border-top: 3px solid hsl(217, 71%, 53%);
+	 }
+	 
+	 div.columns { 
+      margin-top: 50px; 
+    } 
+  
+    .modal-content { 
+      margin-top: 100px; 
+      width: 70%; 
+    } 
 	  
 	  </style>
    </head>
    
 	
-	<body>
-		<nav class="navbar" role="navigation" aria-label="main navigation">
-		  <div class="navbar-brand">
-			<div class="navbar-item"><a class="button" href="/home"><span class="has-text-primary">Mu</span>sync</a></div>
+<body>
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+	  <div class="navbar-brand">
+		<div class="navbar-item"><a class="button" href="home.html"><span class="has-text-primary">Mu</span>sync</a></div>
 
-		  </div>
-		  <div id="navbar" class="navbar-menu">
-			<div class="navbar-start">
-			  <a class="navbar-item" href="">About</a>
-			</div>
-		  </div>
-		</nav>
+	  </div>
+	  <div id="navbar" class="navbar-menu">
+		<div class="navbar-start">
+		  <a class="navbar-item" href="">About</a>
+		</div>
+	  </div>
+	</nav>
 	
+
+
+	
+	<section class="section">
 		
-		<section class="section">
-			<h1 class="title is-size-1 has-text-primary"> Classes </h1>
-			<div class = "hero-body">
-				{% for class in classes %}
-				<a href="{{url_for('showClass', classcode=code)}}">{{ classCode }}</a>
-				{{% endfor %}}
+		
+		<div class="container">
+		
+			<h1 class="title is-size-1 has-text-primary"> Classes: </h1>
+			<hr class="solid">
+			
+			<br>
+			
+			<div class="columns is-multiline">
+				<div class="column is-one-third">
+				
+			
+					<div class="notification is-primary">
+						<a class="title center"> WEF96E </a>
+					</div>
+					
+					
+				</div>
+				
 			</div>
-		</section>
+			
+			<br>
+			
+			<hr class="solid2">
+			
+
+			<div class="columns is-multiline">
+				<div class="column is-one-third">
+				
+					<div class="notification is-info">
+						<a class="title center" id = "btn"> Join/Create Class </a>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</section>
+	
+	<div class="modal"> 
+          <div class="modal-background"></div> 
+          <div class="modal-content"> 
+            <div class="box"> 
+              <div> 
+                <h1 class='title has-text-centered'> 
+                  Join/Create Class
+                </h1> 
+              </div> 
+              <section class="section">
+		
+					<div class="columns">
+						<div class="column is-one-half">
+							<div class="notification is-info">
+								<h1 class="title"> Join Class </h1>
+								
+								<form action="/joinClass" method="POST"> 
+								  <div class="field">
+									<div class="control">
+									  <input class="input is-large" type="username" placeholder="Class Code" autofocus="" name="classcode">
+									</div>
+								  </div>
+								  
+								  <br>
+								  
+								  <button  type = "submit" class="button is-block is-link is-large is-fullwidth">Join</button>
+								</form>
+							</div>
+						</div>
+						
+						<div class="column is-one-half">
+							<div class="notification is-primary">
+								<h1 class="title"> Create Class </h1>
+								<form action="/createClass" method="POST"> 
+								  <div class="field">
+									<div class="control">
+									  <input class="input is-large" type="username" placeholder="Class Code" autofocus="" name="classcode">
+									</div>
+								  </div>
+								  
+								  <br>
+								  
+								  <button  type = "submit" class="button is-block is-warning is-large is-fullwidth">Create</button>
+								</form>
+								
+							</div>
+						</div>
+				</div>
+				
+			  </section>
+            </div> 
+          </div> 
+          <button class="modal-close is-large"
+                  aria-label="close"> 
+            Model 
+          </button> 
+        </div> 
 	
 	
-	</body>
+
+	<script> 
+		// Bulma does not have JavaScript included, 
+		// hence custom JavaScript has to be 
+		// written to open or close the modal 
+		const modal = document.querySelector('.modal'); 
+		const btn = document.querySelector('#btn') 
+		const close = document.querySelector('.modal-close') 
+	  
+		btn.addEventListener('click', 
+							 function () { 
+		  modal.style.display = 'block' 
+		}) 
+	  
+		close.addEventListener('click', 
+							   function () { 
+		  modal.style.display = 'none' 
+		}) 
+	  
+		window.addEventListener('click', 
+								function (event) { 
+		  if (event.target.className === 
+			  'modal-background') { 
+			modal.style.display = 'none' 
+		  } 
+		}) 
+	  </script> 
+</body>
 	
 	
 
