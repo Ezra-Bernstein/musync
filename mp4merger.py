@@ -59,8 +59,11 @@ def mp4merger(fnames):
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
+        bool1 = False
         for j in range(len(fnames[i])):
-            if(fnames[i][len(fnames[i])-j-1]=="/"):
+            if(not bool1 and fnames[i][len(fnames[i])-j-1]=="/"):
+                bool1 = True
+            elif(fnames[i][len(fnames[i])-j-1]=="/"):
                 os.mkdir("/tmp/new_" + fnames[i][:j-2])
                 break
         command = "ffmpeg -i /tmp/" + fnames[i] + " -ss " + str(secs[i]) + " /tmp/new_" + fnames[i]
