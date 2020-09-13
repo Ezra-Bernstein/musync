@@ -1,7 +1,7 @@
 import ffmpeg, os
 from operator import itemgetter
 
-delim = "_"
+delim = ""
 
 def get_video_properties(v):
     
