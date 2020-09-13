@@ -23,9 +23,14 @@ def transfer_files(bucket_name, classcode):
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
     count = 0
+    out = []
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:
-            blob.download_to_filename("tmp/"+classcode+"/"+blob.name[len(classcode)+1:])
+            name = classcode+"/"+blob.name[len(classcode)+1:]
+            blob.download_to_filename("tmp/"+name)
+            out.append(name)
+    return out
+    
             
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
