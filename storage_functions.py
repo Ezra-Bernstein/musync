@@ -51,5 +51,3 @@ def download_blob(bucket_name, source_blob_name, destination_file_name):
         )
     )
 
-
-transfer_files("musync-1.appspot.com", "myclasscode")
