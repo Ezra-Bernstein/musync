@@ -8,7 +8,7 @@ import os
 def cutter(filename):
     sf, data = read(filename)
     SCAN_TIME = 51 #how many seconds in the beginning do you scan the clap for?
-    THRESH_CAP =  .95
+    THRESH_CAP =  .4
     if data.ndim == 1:
         data = list(map(abs, data[:SCAN_TIME*sf]))
     else:
@@ -59,6 +59,10 @@ def mp4merger(fnames):
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
+        for j in range(len(fnames[i])):
+            if(fnames[i][len(fnames[i])-j-1]=="/"):
+                os.mkdir("/tmp/new_" + fnames[i][:j-2])
+                break
         command = "ffmpeg -i /tmp/" + fnames[i] + " -ss " + str(secs[i]) + " /tmp/new_" + fnames[i]
         subprocess.call(command, shell=True)
         
