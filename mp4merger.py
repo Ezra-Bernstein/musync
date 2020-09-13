@@ -61,4 +61,4 @@ def mp4merger(fnames):
         subprocess.call(command, shell=True)
 #        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\tmp\\new_"+fnames[i]])
 
-mp4merger(["v1.mp4","v2.mp4","v3.mp4"])         
+# mp4merger(["v1.mp4","v2.mp4","v3.mp4"])         
