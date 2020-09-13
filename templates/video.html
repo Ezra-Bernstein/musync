@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+      <meta charset = "utf-8">
+      
+      <!--responsive viewport meta tag-->
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      <title> Final </title>
+      
+      <!--Bulma CSS CDN-->
+      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+      
+      <!--To make use of Font Awesome icons-->
+      <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	  
+	  <style>
+	  
+	  .center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	  }
+	  
+	  </style>
+   </head>
+   
+	
+<body>
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+	  <div class="navbar-brand">
+		<div class="navbar-item"><a class="button" href="/home"><span class="has-text-primary">Mu</span>sync</a></div>
+
+	  </div>
+	  <div id="navbar" class="navbar-menu">
+		<div class="navbar-start">
+		  <a class="navbar-item" href="">About</a>
+		</div>
+	  </div>
+	</nav>
+	
+	
+	
+	<section class="section">
+	
+		<h1 class="title is-size-1 has-text-primary"> Final Video: </h1>
+	
+		<!-- Video Goes Here -->
+		<video controls src = "{{ 'https://storage.cloud.google.com/musync-1.appspot.com/' + classcode + '/final.mp4' }}" height=100% width=100%></video>
+	</section>
+</body>
+	
+	
+
+</html>
