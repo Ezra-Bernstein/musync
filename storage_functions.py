@@ -25,7 +25,7 @@ def transfer_files(bucket_name, classcode):
     count = 0
     for blob in blobs:
         if blob.name[:len(classcode)] == classcode:
-            blob.download_to_filename("tmp/"+classcode+"/"+blob.name[len(classcode):])
+            blob.download_to_filename("tmp/"+classcode+"/"+blob.name[len(classcode)+1:])
             
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
