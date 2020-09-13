@@ -8,7 +8,7 @@ import os
 def cutter(filename):
     sf, data = read(filename)
     SCAN_TIME = 51 #how many seconds in the beginning do you scan the clap for?
-    THRESH_CAP = .4
+    THRESH_CAP =  .95
     if data.ndim == 1:
         data = list(map(abs, data[:SCAN_TIME*sf]))
     else:
@@ -39,26 +39,26 @@ def mp4merger(fnames):
     for i in range(len(fnames)):
         command = "ffmpeg -i /tmp/" + fnames[i] + " /tmp/" + str(i) + ".wav"
         subprocess.call(command, shell=True)
-#        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], os.getcwd()+"\\tmp\\"+str(i)+".wav"])
-  
+        
     #cut both to start at clap
     times = []
     secs = []
+    tup = []
     for i in range(len(fnames)):
         fs, x = read("./tmp/"+str(i)+".wav")
         times.append(cutter("./tmp/"+str(i)+".wav"))
         secs.append(times[i]/fs)
         write("./tmp/"+str(i)+"_clipped.wav", fs, x[times[i]:])
+        tup.append((str(i),len(x[times[i]:])))
+    tup.sort(key=lambda x: (x[1]))
 
-    #create a combined mixed.wav file
-    merge2("./tmp/0_clipped.wav", "./tmp/1_clipped.wav")
+    #create a combined mixed.wav fileS        
+    merge2("./tmp/"+tup[0][0]+"_clipped.wav", "./tmp/"+tup[1][0]+"_clipped.wav")
     for i in range(2, len(fnames)):
-        merge1("./tmp/"+str(i)+"_clipped.wav")
+        merge1("./tmp/"+tup[i][0]+"_clipped.wav")
 
     #cut the video portions of original files and save with "new_" before the original name
     for i in range(len(fnames)):
         command = "ffmpeg -i /tmp/" + fnames[i] + " -ss " + str(secs[i]) + " /tmp/new_" + fnames[i]
         subprocess.call(command, shell=True)
-#        subprocess.call(['C:\\Users\\ayush\\Documents\\Extra\\Random Projects\\pennapps2020\\ffmpeg-20200831-4a11a6f-win64-static\\ffmpeg-20200831-4a11a6f-win64-static\\bin\\ffmpeg','-i', os.getcwd()+"\\tmp\\"+fnames[i], '-ss', str(secs[i]), os.getcwd()+"\\tmp\\new_"+fnames[i]])
-
-# mp4merger(["v1.mp4","v2.mp4","v3.mp4"])         
+        
